@@ -1,29 +1,64 @@
-// zalo.js - Zalo API utility functions
+// utils/zalo.js - Zalo API client
 const axios = require('axios');
+const logger = require('./logger');
 
-const ZALO_API_URL = 'https://openapi.zalo.me/v3.0';
+const ZALO_API_URL = 'https://openapi.zalo.me/v3.0/oa/message/cs';
 
-class ZaloClient {
-  constructor() {
-    this.appId = process.env.ZALO_APP_ID;
-    this.appSecret = process.env.ZALO_APP_SECRET;
-    this.accessToken = process.env.ZALO_ACCESS_TOKEN;
-    this.refreshToken = process.env.ZALO_REFRESH_TOKEN;
-    this.oaId = process.env.ZALO_OA_ID;
+/**
+ * Send text message to Zalo user
+ * @param {string} userId - Zalo user ID
+ * @param {string} text - Message text
+ * @returns {Promise<Object>} - API response
+ */
+async function sendMessage(userId, text) {
+  const accessToken = process.env.ZALO_ACCESS_TOKEN;
+
+  if (!accessToken) {
+    throw new Error('ZALO_ACCESS_TOKEN is not configured');
   }
 
-  // TODO: Implement Zalo API methods
-  async sendMessage(userId, message) {
-    // Placeholder for send message implementation
-  }
+  const payload = {
+    recipient: {
+      user_id: String(userId)
+    },
+    message: {
+      text: String(text)
+    }
+  };
 
-  async getUserInfo(userId) {
-    // Placeholder for get user info implementation
-  }
+  try {
+    const response = await axios.post(ZALO_API_URL, payload, {
+      headers: {
+        'access_token': accessToken,
+        'Content-Type': 'application/json'
+      },
+      timeout: 10000
+    });
 
-  async refreshAccessToken() {
-    // Placeholder for refresh token implementation
+    logger.info('Zalo message sent successfully', {
+      type: 'zalo_outbound',
+      userId,
+      messageLength: text.length
+    });
+
+    return response.data;
+  } catch (error) {
+    const errorInfo = {
+      type: 'zalo_error',
+      userId,
+      status: error.response?.status,
+      message: error.message
+    };
+
+    if (error.response?.data) {
+      errorInfo.details = error.response.data;
+    }
+
+    logger.error('Failed to send Zalo message', errorInfo);
+    throw error;
   }
 }
 
-module.exports = new ZaloClient();
+module.exports = {
+  sendMessage
+};

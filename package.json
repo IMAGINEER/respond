@@ -1,7 +1,7 @@
 {
   "name": "respond",
   "version": "1.0.0",
-  "description": "Zalo OA ↔ Respond.io Custom Channel双向通信项目",
+  "description": "Zalo OA ↔ Respond.io Custom Channel Bridge",
   "main": "index.js",
   "scripts": {
     "dev": "netlify dev",
@@ -17,6 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.6.0",
-    "dotenv": "^16.3.1"
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
   }
 }
