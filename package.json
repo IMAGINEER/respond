@@ -1,0 +1,22 @@
+{
+  "name": "respond",
+  "version": "1.0.0",
+  "description": "Zalo OA ↔ Respond.io Custom Channel双向通信项目",
+  "main": "index.js",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "netlify build",
+    "deploy": "netlify deploy"
+  },
+  "keywords": [
+    "zalo",
+    "respondio",
+    "netlify-functions"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1"
+  }
+}
