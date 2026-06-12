@@ -1,7 +1,7 @@
 // netlify/functions/zalo-webhook.js - Zalo inbound webhook handler
 require('dotenv').config();
-const { sendInboundMessage } = require('../utils/respondio');
-const logger = require('../utils/logger');
+const { sendInboundMessage } = require('./utils/respondio');
+const logger = require('./utils/logger');
 
 // Supported event types
 const SUPPORTED_EVENTS = ['user_send_text'];

@@ -15,13 +15,15 @@
 respond/
 ├── netlify/
 │   └── functions/
-│       ├── health.js           # 健康检查 GET /.netlify/functions/health
-│       ├── zalo-webhook.js     # Zalo 入站 webhook POST
-│       └── message.js          # Respond.io 出站消息 POST
-├── utils/
-│   ├── logger.js               # 结构化 JSON 日志
-│   ├── respondio.js            # Respond.io API 客户端
-│   └── zalo.js                # Zalo API 客户端
+│       ├── health.js           # 健康检查
+│       ├── zalo-webhook.js     # Zalo 入站 webhook
+│       ├── message.js          # Respond.io 出站消息
+│       ├── oauth-callback.js   # (预留)
+│       ├── refresh-token.js    # (预留)
+│       └── utils/
+│           ├── logger.js       # 结构化 JSON 日志
+│           ├── respondio.js    # Respond.io API 客户端
+│           └── zalo.js        # Zalo API 客户端
 ├── package.json
 ├── netlify.toml
 ├── .env.example

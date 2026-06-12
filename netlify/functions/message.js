@@ -1,8 +1,8 @@
 // netlify/functions/message.js - Respond.io outbound message handler
 require('dotenv').config();
-const { sendMessage } = require('../utils/zalo');
-const { verifyToken } = require('../utils/respondio');
-const logger = require('../utils/logger');
+const { sendMessage } = require('./utils/zalo');
+const { verifyToken } = require('./utils/respondio');
+const logger = require('./utils/logger');
 
 exports.handler = async (event, context) => {
   const requestId = `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
